@@ -1335,21 +1335,69 @@
         evaluateLogic(); // Run once on load
 
         // --- 4. Form Submission ---
+       <!-- ... existing code ... -->
         const form = document.getElementById('onboarding_form');
         const btnSubmit = document.getElementById('btn_submit');
         const successMsg = document.getElementById('success_message');
         
-        // COLE SUA URL DO GOOGLE APPS SCRIPT AQUI ABAIXO DENTRO DAS ASPAS:
-        const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec';
+        // MANTENHA A SUA URL AQUI NESTA VARIÁVEL!
+        // IMPORTANTE: Cole sua URL real substituindo o texto, mantendo as aspas simples.
+        const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             btnSubmit.disabled = true;
             btnSubmit.innerText = '⏳ Enviando Informações...';
 
-            // Collect Data
             const formData = new FormData(form);
             const groupedData = {};
+
+            for (let [key, value] of formData.entries()) {
+                if (value instanceof File) {
+                    value = value.name ? `[Arquivo: ${value.name}]` : '';
+                    if(!value) continue;
+                }
+                if (groupedData[key]) {
+                    groupedData[key].push(value);
+                } else {
+                    groupedData[key] = [value];
+                }
+            }
+
+            const urlSearchParams = new URLSearchParams();
+            for (const key in groupedData) {
+                urlSearchParams.append(key, groupedData[key].join(', '));
+            }
+
+            try {
+                // A SOLUÇÃO: mode 'no-cors' força o navegador a não bloquear a requisição.
+                await fetch(webhookUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    body: urlSearchParams,
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+                
+                // Devido ao 'no-cors', não conseguimos ler a resposta (sucesso/erro) exata, 
+                // portanto assumimos que, se o envio passou (não lançou erro de rede), deu certo.
+                form.style.display = 'none';
+                document.querySelector('.logo-upload-container').style.display = 'none';
+                successMsg.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Erro no envio', error);
+                alert('Falha na conexão de rede. Verifique sua internet e tente novamente.');
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = '🚀 Enviar Informações';
+            }
+        });
+    });
+</script>
+</body>
+</html>
 
             // Parse Form Data merging multiple checkboxes into comma-separated strings
             for (let [key, value] of formData.entries()) {
