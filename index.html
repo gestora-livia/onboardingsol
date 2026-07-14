@@ -86,38 +86,22 @@
             width: 150px;
             height: 150px;
             margin: 0 auto;
-            border: 2px dashed var(--border-color);
+            border: none;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             overflow: hidden;
-            background-color: var(--card-bg);
+            background-color: transparent;
             transition: var(--transition);
             position: relative;
-        }
-
-        .logo-preview-box:hover {
-            border-color: var(--primary-color);
         }
 
         .logo-preview-box img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: none;
-        }
-
-        .logo-preview-box span {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-align: center;
-            padding: 10px;
-        }
-
-        #logo_upload {
-            display: none;
+            display: block;
         }
 
         form {
@@ -301,15 +285,12 @@
     </header>
 
     <div class="logo-upload-container">
-        <label for="logo_upload" class="logo-preview-box" id="logo_preview_box">
-            <span id="logo_placeholder">Clique para enviar a Logo</span>
-            <img id="logo_image" alt="Logo do Projeto">
-        </label>
-        <input type="file" id="logo_upload" accept="image/*">
+        <div class="logo-preview-box" id="logo_preview_box">
+            <img id="logo_image" src="https://sua-url-da-logo.com/imagem-logo.png" alt="Logo do Projeto">
+        </div>
     </div>
 
     <form id="onboarding_form">
-        <!-- 📋 Bloco 1: Identificação -->
         <fieldset>
             <legend>📋 Bloco 1: Identificação e Contato (O Especialista)</legend>
             <div class="form-group">
@@ -339,7 +320,6 @@
             </div>
         </fieldset>
 
-        <!-- 🚀 Bloco 2: Visão Geral do Projeto -->
         <fieldset>
             <legend>🚀 Bloco 2: Visão Geral do Projeto</legend>
             <div class="form-group">
@@ -361,7 +341,6 @@
             </div>
         </fieldset>
 
-        <!-- 📦 Bloco 3: O Produto -->
         <fieldset>
             <legend>📦 Bloco 3: O Produto (Entrega e Vendas)</legend>
             <div class="form-group">
@@ -466,7 +445,6 @@
             </div>
         </fieldset>
 
-        <!-- ⚙️ Bloco 4: Estrutura Operacional -->
         <fieldset>
             <legend>⚙️ Bloco 4: Estrutura Operacional, Ferramentas e Equipe</legend>
             <div class="form-group">
@@ -512,7 +490,6 @@
             </div>
         </fieldset>
 
-        <!-- 🎯 Bloco 5: Estratégia e Metas -->
         <fieldset>
             <legend>🎯 Bloco 5: Estratégia e Metas</legend>
             <div class="form-group">
@@ -554,9 +531,6 @@
             </div>
         </fieldset>
 
-        <!-- ========================================== -->
-        <!-- 🅰️ BIFURCAÇÃO A: Lançamento Clássico -->
-        <!-- ========================================== -->
         <div id="bifurcacao_classico" class="hidden" data-show-if="modelo_vendas:classico">
             <h3 class="bifurcation-title">🅰️ BIFURCAÇÃO A: Lançamento Clássico</h3>
             
@@ -566,7 +540,6 @@
                     <label for="a_nome_evento">Nome do Evento Gratuito:</label>
                     <input type="text" id="a_nome_evento" name="a_nome_evento">
                 </div>
-                <!-- Pergunta Adicionada: Briefing do Evento Clássico -->
                 <div class="form-group">
                     <label>Briefing do Evento Clássico:</label>
                     <div class="radio-group">
@@ -815,9 +788,6 @@
             </fieldset>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ☄️ BIFURCAÇÃO B: Lançamento Meteórico -->
-        <!-- ========================================== -->
         <div id="bifurcacao_meteorico" class="hidden" data-show-if="modelo_vendas:meteorico">
             <h3 class="bifurcation-title">☄️ BIFURCAÇÃO B: Meteórico</h3>
             <fieldset>
@@ -963,9 +933,6 @@
             </fieldset>
         </div>
 
-        <!-- ========================================== -->
-        <!-- ♾️ BIFURCAÇÃO C: Perpétuo -->
-        <!-- ========================================== -->
         <div id="bifurcacao_perpetuo" class="hidden" data-show-if="modelo_vendas:perpetuo">
             <h3 class="bifurcation-title">♾️ BIFURCAÇÃO C: Funil Perpétuo</h3>
             <fieldset>
@@ -1072,20 +1039,16 @@
             </fieldset>
         </div>
 
-        <!-- ========================================== -->
-        <!-- 💳 BIFURCAÇÃO D: Lançamento Pago -->
-        <!-- ========================================== -->
         <div id="bifurcacao_pago" class="hidden" data-show-if="modelo_vendas:pago">
             <h3 class="bifurcation-title">💳 BIFURCAÇÃO D: Lançamento Pago</h3>
             <fieldset>
                 <legend>D1 & D2: Cronograma e Ingresso</legend>
                 <div class="form-group"><label>Nome Evento Pago:</label><input type="text" name="d_nome_evento"></div>
-                <!-- Pergunta Adicionada: Briefing do Evento Pago -->
                 <div class="form-group">
                     <label>Briefing do Evento Pago:</label>
                     <div class="radio-group">
                         <label class="radio-item"><input type="radio" name="d_status_briefing" value="sim"> Já temos (Anexar)</label>
-                        <label class="radio-item"><input type="radio" name="d_status_briefing" value="nao"> Não temos</label>
+                        <label class="radio-item"><input type="radio" name="d_status_briefing" value="na"> Não temos</label>
                     </div>
                 </div>
                 <div class="form-group sub-group hidden" data-show-if="d_status_briefing:sim">
@@ -1156,9 +1119,6 @@
             </fieldset>
         </div>
 
-        <!-- ========================================== -->
-        <!-- 🎟️ BIFURCAÇÃO E: Presencial -->
-        <!-- ========================================== -->
         <div id="bifurcacao_presencial" class="hidden" data-show-if="integracao_presencial:sim">
             <h3 class="bifurcation-title" style="background-color: var(--accent-color);">🎟️ BIFURCAÇÃO E: Evento Presencial</h3>
             <fieldset>
@@ -1244,25 +1204,7 @@
             }
         });
 
-        // --- 2. Logo Upload Preview ---
-        const logoUpload = document.getElementById('logo_upload');
-        const logoImage = document.getElementById('logo_image');
-        const logoPlaceholder = document.getElementById('logo_placeholder');
-
-        logoUpload.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    logoImage.src = e.target.result;
-                    logoImage.style.display = 'block';
-                    logoPlaceholder.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // --- 3. Conditional Logic Engine ---
+        // --- 2. Conditional Logic Engine ---
         function evaluateLogic() {
             // Radio & Select Logic [data-show-if="name:value"]
             document.querySelectorAll('[data-show-if]').forEach(el => {
@@ -1334,14 +1276,12 @@
         document.addEventListener('input', evaluateLogic);
         evaluateLogic(); // Run once on load
 
-        // --- 4. Form Submission ---
-       <!-- ... existing code ... -->
+        // --- 3. Form Submission ---
         const form = document.getElementById('onboarding_form');
         const btnSubmit = document.getElementById('btn_submit');
         const successMsg = document.getElementById('success_message');
         
-        // MANTENHA A SUA URL AQUI NESTA VARIÁVEL!
-        // IMPORTANTE: Cole sua URL real substituindo o texto, mantendo as aspas simples.
+        // COLE SUA URL DE IMPLANTAÇÃO REAL DO APPS SCRIPT AQUI!
         const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
         form.addEventListener('submit', async (e) => {
@@ -1370,7 +1310,7 @@
             }
 
             try {
-                // A SOLUÇÃO: mode 'no-cors' força o navegador a não bloquear a requisição.
+                // A SOLUÇÃO: mode 'no-cors' força o navegador a ignorar barreiras CORS na resposta.
                 await fetch(webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -1380,8 +1320,6 @@
                     }
                 });
                 
-                // Devido ao 'no-cors', não conseguimos ler a resposta (sucesso/erro) exata, 
-                // portanto assumimos que, se o envio passou (não lançou erro de rede), deu certo.
                 form.style.display = 'none';
                 document.querySelector('.logo-upload-container').style.display = 'none';
                 successMsg.classList.remove('hidden');
@@ -1390,52 +1328,6 @@
             } catch (error) {
                 console.error('Erro no envio', error);
                 alert('Falha na conexão de rede. Verifique sua internet e tente novamente.');
-                btnSubmit.disabled = false;
-                btnSubmit.innerText = '🚀 Enviar Informações';
-            }
-        });
-    });
-</script>
-</body>
-</html>
-
-            // Parse Form Data merging multiple checkboxes into comma-separated strings
-            for (let [key, value] of formData.entries()) {
-                if (value instanceof File) {
-                    value = value.name ? `[Arquivo: ${value.name}]` : '';
-                    if(!value) continue;
-                }
-
-                if (groupedData[key]) {
-                    groupedData[key].push(value);
-                } else {
-                    groupedData[key] = [value];
-                }
-            }
-
-            const urlSearchParams = new URLSearchParams();
-            for (const key in groupedData) {
-                urlSearchParams.append(key, groupedData[key].join(', '));
-            }
-
-            try {
-                // Envio real via Fetch
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    body: urlSearchParams,
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                });
-                
-                form.style.display = 'none';
-                document.querySelector('.logo-upload-container').style.display = 'none';
-                successMsg.classList.remove('hidden');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-            } catch (error) {
-                console.error('Erro no envio', error);
-                alert('Houve um erro ao salvar na planilha. Certifique-se de que substituiu "SUA_URL_AQUI" pela URL correta da Implantação do Google!');
                 btnSubmit.disabled = false;
                 btnSubmit.innerText = '🚀 Enviar Informações';
             }
