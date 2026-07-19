@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding Operational - S.O.L</title>
+    <title>Onboarding Operacional - S.O.L</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -101,7 +101,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            display: block;
+            display: none; /* Inicia oculto até o link carregar e evitar quebras */
         }
 
         form {
@@ -286,13 +286,12 @@
 
     <div class="logo-upload-container">
         <div class="logo-preview-box" id="logo_preview_box">
-            <img id="logo_image" src="" alt="Logo do Projeto">
+            <img id="logo_image" alt="Logo do Projeto">
         </div>
     </div>
 
     <form id="onboarding_form">
-        <input type="hidden" id="logo_personalizada_url" name="logo_personalizada_url">
-
+        <!-- 📋 Bloco 1: Identificação -->
         <fieldset>
             <legend>📋 Bloco 1: Identificação e Contato (O Especialista)</legend>
             <div class="form-group">
@@ -322,6 +321,7 @@
             </div>
         </fieldset>
 
+        <!-- 🚀 Bloco 2: Visão Geral do Projeto -->
         <fieldset>
             <legend>🚀 Bloco 2: Visão Geral do Projeto</legend>
             
@@ -352,6 +352,7 @@
             </div>
         </fieldset>
 
+        <!-- 📦 Bloco 3: O Produto -->
         <fieldset>
             <legend>📦 Bloco 3: O Produto (Entrega e Vendas)</legend>
             <div class="form-group">
@@ -456,6 +457,7 @@
             </div>
         </fieldset>
 
+        <!-- ⚙️ Bloco 4: Estrutura Operacional -->
         <fieldset>
             <legend>⚙️ Bloco 4: Estrutura Operacional, Ferramentas e Equipe</legend>
             <div class="form-group">
@@ -501,6 +503,7 @@
             </div>
         </fieldset>
 
+        <!-- 🎯 Bloco 5: Estratégia e Metas -->
         <fieldset>
             <legend>🎯 Bloco 5: Estratégia e Metas</legend>
             <div class="form-group">
@@ -542,6 +545,9 @@
             </div>
         </fieldset>
 
+        <!-- ========================================== -->
+        <!-- 🅰️ BIFURCAÇÃO A: Lançamento Clássico -->
+        <!-- ========================================== -->
         <div id="bifurcacao_classico" class="hidden" data-show-if="modelo_vendas:classico">
             <h3 class="bifurcation-title">🅰️ BIFURCAÇÃO A: Lançamento Clássico</h3>
             
@@ -799,6 +805,9 @@
             </fieldset>
         </div>
 
+        <!-- ========================================== -->
+        <!-- ☄️ BIFURCAÇÃO B: Lançamento Meteórico -->
+        <!-- ========================================== -->
         <div id="bifurcacao_meteorico" class="hidden" data-show-if="modelo_vendas:meteorico">
             <h3 class="bifurcation-title">☄️ BIFURCAÇÃO B: Meteórico</h3>
             <fieldset>
@@ -944,6 +953,9 @@
             </fieldset>
         </div>
 
+        <!-- ========================================== -->
+        <!-- ♾️ BIFURCAÇÃO C: Perpétuo -->
+        <!-- ========================================== -->
         <div id="bifurcacao_perpetuo" class="hidden" data-show-if="modelo_vendas:perpetuo">
             <h3 class="bifurcation-title">♾️ BIFURCAÇÃO C: Funil Perpétuo</h3>
             <fieldset>
@@ -971,7 +983,7 @@
                 <div class="grid-2" style="margin-top:20px;">
                     <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="c_data_abertura"></div>
                     <div class="form-group"><label>Tráfego Vendas:</label><input type="datetime-local" name="c_data_trafego"></div>
-                    <div class="form-group"><label>Encerramento:</label><input type="datetime-local" name="c_data_encerramento"></div>
+                    <div class="form-group"><label>Encerramento:</label><input type="datetime-local" name="c_data_Campanha_encerramento"></div>
                     <div class="form-group"><label>Debriefing:</label>
                         <select name="c_data_debriefing"><option value="a_definir">A definir</option></select>
                     </div>
@@ -1050,6 +1062,9 @@
             </fieldset>
         </div>
 
+        <!-- ========================================== -->
+        <!-- 💳 BIFURCAÇÃO D: Lançamento Pago -->
+        <!-- ========================================== -->
         <div id="bifurcacao_pago" class="hidden" data-show-if="modelo_vendas:pago">
             <h3 class="bifurcation-title">💳 BIFURCAÇÃO D: Lançamento Pago</h3>
             <fieldset>
@@ -1152,6 +1167,9 @@
             </fieldset>
         </div>
 
+        <!-- ========================================== -->
+        <!-- 🎟️ BIFURCAÇÃO E: Presencial -->
+        <!-- ========================================== -->
         <div id="bifurcacao_presencial" class="hidden" data-show-if="integracao_presencial:sim">
             <h3 class="bifurcation-title" style="background-color: var(--accent-color);">🎟️ BIFURCAÇÃO E: Evento Presencial</h3>
             <fieldset>
@@ -1224,20 +1242,26 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         
-        // --- 1. Leitura Dinâmica da Logo pela URL ---
-        const urlParams = new URLSearchParams(window.location.search);
-        const logoUrl = urlParams.get('logo');
-        const logoImage = document.getElementById('logo_image');
-        const logoInput = document.getElementById('logo_personalizada_url');
+        // MANTENHA A SUA URL REAL DE IMPLEMENTAÇÃO DO GOOGLE APPS SCRIPT AQUI!
+        const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
-        if (logoUrl) {
-            const decodedUrl = decodeURIComponent(logoUrl);
-            logoImage.src = decodedUrl;
-            logoInput.value = decodedUrl; // Guarda no input para enviar ao sheets
-        } else {
-            // Se não passar nada na URL, use o link padrão da sua marca aqui:
-            logoImage.src = "https://sua-url-da-logo-padrao.com/imagem-logo.png";
-        }
+        // --- 1. Busca Automática da Logo Fixa na Planilha via GET ---
+        const logoImage = document.getElementById('logo_image');
+        
+        fetch(webhookUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.logoUrl) {
+                    logoImage.src = data.logoUrl;
+                    logoImage.style.display = 'block'; // Mostra a logo de forma limpa
+                } else {
+                    logoImage.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao ler a logo da planilha:', error);
+                logoImage.style.display = 'none';
+            });
 
         // --- 2. Theme Toggle ---
         const themeToggle = document.getElementById('theme_toggle');
@@ -1254,7 +1278,6 @@
 
         // --- 3. Conditional Logic Engine ---
         function evaluateLogic() {
-            // Radio & Select Logic [data-show-if="name:value"]
             document.querySelectorAll('[data-show-if]').forEach(el => {
                 const parts = el.getAttribute('data-show-if').split(':');
                 const fieldName = parts[0];
@@ -1274,7 +1297,6 @@
                 }
             });
 
-            // Checkbox Logic [data-show-if-checked="id"]
             document.querySelectorAll('[data-show-if-checked]').forEach(el => {
                 const checkboxId = el.getAttribute('data-show-if-checked');
                 const checkbox = document.getElementById(checkboxId);
@@ -1286,7 +1308,6 @@
                 }
             });
 
-            // Check if Extra Volumes div should appear in A and B
             ['a', 'b'].forEach(prefix => {
                 const divExtra = document.getElementById(`${prefix}_div_volume_extra`);
                 if(divExtra) {
@@ -1302,7 +1323,7 @@
                 }
             });
 
-            // Gerenciamento dinâmico de datas para as CPLs do Clássico (A)
+            // CPLs do Clássico (A)
             const qtdCpls = document.getElementById('a_qtd_cpls');
             const datasCplsBox = document.getElementById('a_datas_cpls');
             if(qtdCpls && datasCplsBox) {
@@ -1318,7 +1339,7 @@
                 }
             }
 
-            // Gerenciamento dinâmico de datas para as Aulas do Pago (D)
+            // Aulas do Pago (D)
             const dQtdCpls = document.getElementById('d_qtd_cpls');
             const dDatasCplsBox = document.getElementById('d_datas_cpls');
             if(dQtdCpls && dDatasCplsBox) {
@@ -1335,18 +1356,14 @@
             }
         }
 
-        // Event listeners para reavaliar as regras quando houver mudanças
         document.addEventListener('change', evaluateLogic);
         document.addEventListener('input', evaluateLogic);
-        evaluateLogic(); // Executa ao carregar a página
+        evaluateLogic();
 
         // --- 4. Form Submission ---
         const form = document.getElementById('onboarding_form');
         const btnSubmit = document.getElementById('btn_submit');
         const successMsg = document.getElementById('success_message');
-        
-        // MANTENHA A SUA URL REAL DE IMPLEMENTAÇÃO DO GOOGLE APPS SCRIPT AQUI!
-        const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -1374,7 +1391,6 @@
             }
 
             try {
-                // Utilizando modo 'no-cors' para evitar bloqueios de segurança do navegador na resposta
                 await fetch(webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
