@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* PADRÃO: Dark Theme - Preto absoluto e Marrom Luxo */
+            /* PADRÃO: Dark Theme Luxo */
             --bg-color: #0d0d0d;
             --text-color: #f5f5f5;
             --text-muted: #a6a6a6;
@@ -15,20 +15,20 @@
             --border-color: #2c2c26;
             --primary-color: #4a2c26; /* Marrom escuro luxo nos botões e títulos */
             --primary-hover: #331b17;
-            --accent-color: #d4af37; /* Dourado */
+            --accent-color: #d4af37;
             --input-bg: #22221f;
             --shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             --transition: all 0.3s ease;
         }
 
         [data-theme="light"] {
-            /* OPCIONAL: Light Theme - Tons creme e marrom */
+            /* OPCIONAL: Light Theme */
             --bg-color: #fcf9f5;
             --text-color: #2d1d1a;
             --text-muted: #7a5c55;
             --card-bg: #ffffff;
             --border-color: #e8e2de;
-            --primary-color: #4a2c26; /* Mantém o marrom escuro destacado */
+            --primary-color: #4a2c26;
             --primary-hover: #331b17;
             --accent-color: #b5952f;
             --input-bg: #ffffff;
@@ -73,24 +73,17 @@
             box-shadow: var(--shadow);
         }
 
-        .theme-toggle:hover {
-            border-color: var(--accent-color);
-        }
+        .theme-toggle:hover { border-color: var(--accent-color); }
 
         .logo-upload-container {
             text-align: center;
             margin-bottom: 40px;
-            margin-top: 10px;
         }
 
-        /* LOGO AJUSTADA: Maior, imponente e sem cortes circulares */
         .logo-preview-box {
             width: 100%;
             max-width: 260px;
-            min-height: 100px;
             margin: 0 auto;
-            border: none;
-            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -103,6 +96,7 @@
             height: auto;
             max-height: 160px;
             object-fit: contain;
+            border-radius: 12px;
             display: none; 
         }
 
@@ -122,7 +116,6 @@
             margin-bottom: 20px;
         }
 
-        /* Nomes das sessões em marrom escuro com letras brancas */
         legend {
             background: var(--primary-color);
             color: #ffffff;
@@ -133,23 +126,10 @@
             box-shadow: var(--shadow);
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--text-color);
-        }
-
-        .help-text {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
+        .form-group { margin-bottom: 20px; }
+        .form-group:last-child { margin-bottom: 0; }
+        label { display: block; font-weight: 500; margin-bottom: 8px; color: var(--text-color); }
+        .help-text { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
 
         input[type="text"], input[type="email"], input[type="tel"], input[type="number"], input[type="date"], input[type="datetime-local"], input[type="url"], select, textarea {
             width: 100%;
@@ -168,15 +148,13 @@
             box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
 
+        textarea { resize: vertical; min-height: 100px; }
+        .radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+        .radio-item, .checkbox-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .radio-item input[type="radio"], .checkbox-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent-color); cursor: pointer; }
         .hidden { display: none !important; }
+        .sub-group { margin-top: 15px; padding-left: 20px; border-left: 3px solid var(--primary-color); }
 
-        .sub-group {
-            margin-top: 15px;
-            padding-left: 20px;
-            border-left: 3px solid var(--primary-color);
-        }
-
-        /* Botão de envio em marrom escuro com letras brancas */
         button[type="submit"] {
             background-color: var(--primary-color);
             color: #ffffff;
@@ -190,14 +168,21 @@
             margin-top: 20px;
             box-shadow: var(--shadow);
             transition: var(--transition);
-            letter-spacing: 0.5px;
         }
 
-        button[type="submit"]:hover {
-            background-color: var(--primary-hover);
-        }
+        button[type="submit"]:hover { background-color: var(--primary-hover); }
+        button[type="submit"]:disabled { background-color: var(--text-muted); cursor: not-allowed; }
 
-        /* Títulos de bifurcação em marrom escuro com letras brancas */
+        #success_message {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-top: 40px;
+        }
+        #success_message h2 { color: var(--accent-color); margin-bottom: 10px; }
+
         .bifurcation-title {
             background-color: var(--primary-color);
             color: #ffffff;
@@ -227,9 +212,9 @@
     </div>
 
     <form id="onboarding_form">
-        <!-- 📋 Bloco 1 -->
+        <!-- 📋 Bloco 1: Identificação -->
         <fieldset>
-            <legend>📋 Bloco 1: Identificação e Contato</legend>
+            <legend>📋 Bloco 1: Identificação e Contato (O Especialista)</legend>
             <div class="form-group">
                 <label for="nome_completo_especialista">Nome Completo do Especialista:</label>
                 <input type="text" id="nome_completo_especialista" name="nome_completo_especialista" required>
@@ -240,85 +225,90 @@
                     <input type="email" id="email_contato_principal" name="email_contato_principal" required>
                 </div>
                 <div class="form-group">
-                    <label for="whatsapp_especialista">WhatsApp do Especialista:</label>
+                    <label for="whatsapp_especialista">WhatsApp do Especialista (DDD + Número):</label>
                     <input type="tel" id="whatsapp_especialista" name="whatsapp_especialista" required>
                 </div>
             </div>
             <div class="form-group">
-                <label>Já existe um grupo estruturado com a equipe?</label>
+                <label>Comunicação da Equipe: Já existe um grupo no WhatsApp/Slack com a equipe e o Especialista centralizados?</label>
                 <div class="radio-group">
                     <label class="radio-item"><input type="radio" name="existe_grupo_equipe" value="sim"> Sim</label>
-                    <label class="radio-item"><input type="radio" name="existe_grupo_equipe" value="nao"> Não</label>
+                    <label class="radio-item"><input type="radio" name="existe_grupo_equipe" value="nao"> Não (Nós deveremos criar)</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="existe_grupo_equipe:sim">
-                <label for="link_grupo_equipe">Link de acesso:</label>
+                <label for="link_grupo_equipe">Por favor, insira o link de convite ou informe quem deve me adicionar:</label>
                 <input type="text" id="link_grupo_equipe" name="link_grupo_equipe">
             </div>
         </fieldset>
 
-        <!-- 🚀 Bloco 2 -->
+        <!-- 🚀 Bloco 2: Visão Geral do Projeto -->
         <fieldset>
             <legend>🚀 Bloco 2: Visão Geral do Projeto</legend>
             <div class="form-group">
                 <label>Já existe o espaço do especialista dentro da plataforma de gestão?</label>
                 <div class="radio-group">
                     <label class="radio-item"><input type="radio" name="existe_espaco_especialista" value="sim" required> Sim</label>
-                    <label class="radio-item"><input type="radio" name="existe_espaco_especialista" value="nao"> Não</label>
+                    <label class="radio-item"><input type="radio" name="existe_espaco_especialista" value="na"> Não</label>
                 </div>
             </div>
             <div class="form-group">
-                <label for="nome_projeto">Nome Oficial do Lançamento:</label>
+                <label for="nome_projeto">Nome Oficial do Projeto/Lançamento:</label>
+                <span class="help-text">O nome da campanha/evento em si. Ex: A Semana do Novo Dinheiro</span>
                 <input type="text" id="nome_projeto" name="nome_projeto" required>
             </div>
             <div class="grid-2">
                 <div class="form-group">
-                    <label for="mes_ano_execucao">Mês/Ano de Execução:</label>
+                    <label for="mes_ano_execucao">Mês e Ano de Execução:</label>
+                    <span class="help-text">Ex: Novembro/2026</span>
                     <input type="text" id="mes_ano_execucao" name="mes_ano_execucao" required>
                 </div>
                 <div class="form-group">
-                    <label TIME-STAMP for="data_inicio_producao">Data de Início da Produção:</label>
+                    <label for="data_inicio_producao">Data de Início da Produção:</label>
+                    <span class="help-text">Marco zero. Início do setup operacional.</span>
                     <input type="date" id="data_inicio_producao" name="data_inicio_producao" required>
                 </div>
             </div>
         </fieldset>
 
-        <!-- 📦 Bloco 3 -->
+        <!-- 📦 Bloco 3: O Produto -->
         <fieldset>
-            <legend>📦 Bloco 3: O Produto</legend>
+            <legend>📦 Bloco 3: O Produto (Entrega e Vendas)</legend>
             <div class="form-group">
                 <label for="nome_produto_principal">Nome do Produto Principal:</label>
                 <input type="text" id="nome_produto_principal" name="nome_produto_principal" required>
             </div>
             <div class="form-group">
-                <label for="promessa_produto">Promessa Principal:</label>
+                <label for="promessa_produto">Promessa Principal do Produto:</label>
                 <textarea id="promessa_produto" name="promessa_produto" required></textarea>
             </div>
             <div class="form-group">
                 <label>Formato de Entrega:</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="formato_entrega" value="gravado"> Gravado</label>
-                    <label class="radio-item"><input type="radio" name="formato_entrega" value="ao_vivo"> Ao Vivo</label>
+                    <label class="radio-item"><input type="radio" name="formato_entrega" value="gravado"> 100% Gravado</label>
+                    <label class="radio-item"><input type="radio" name="formato_entrega" value="ao_vivo"> 100% Ao Vivo</label>
                     <label class="radio-item"><input type="radio" name="formato_entrega" value="hibrido"> Híbrido</label>
+                    <label class="radio-item"><input type="radio" name="formato_entrega" value="presencial"> Presencial</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="formato_entrega:hibrido">
-                <label>Especifique:</label>
-                <input type="text" name="especificar_hibrido">
+                <label for="especificar_hibrido">Especifique o formato híbrido:</label>
+                <input type="text" id="especificar_hibrido" name="especificar_hibrido">
             </div>
             <div class="form-group">
                 <label>Status da Entrega:</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_entrega" value="pronto"> Pronto</label>
-                    <label class="radio-item"><input type="radio" name="status_entrega" value="em_producao"> Em produção</label>
+                    <label class="radio-item"><input type="radio" name="status_entrega" value="pronto"> Já está 100% pronto</label>
+                    <label class="radio-item"><input type="radio" name="status_entrega" value="em_producao"> Ainda está em produção</label>
+                    <label class="radio-item"><input type="radio" name="status_entrega" value="sera_ao_vivo"> Será entregue ao vivo</label>
                 </div>
             </div>
             <div class="form-group">
-                <label>Plataforma de Vendas:</label>
-                <input type="text" name="plataforma_vendas" required>
+                <label for="plataforma_vendas">Hospedagem e Plataforma de Vendas:</label>
+                <input type="text" id="plataforma_vendas" name="plataforma_vendas" required>
             </div>
             <div class="form-group">
-                <label>Mapear módulos?</label>
+                <label>Precisaremos mapear e cadastrar os módulos/aulas dentro da plataforma?</label>
                 <div class="radio-group">
                     <label class="radio-item"><input type="radio" name="mapear_modulos" value="sim"> Sim</label>
                     <label class="radio-item"><input type="radio" name="mapear_modulos" value="nao"> Não</label>
@@ -327,112 +317,117 @@
             <div class="form-group">
                 <label>Status do Checkout:</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_checkout" value="pronto"> Pronto</label>
-                    <label class="radio-item"><input type="radio" name="status_checkout" value="configurar"> Configurar</label>
+                    <label class="radio-item"><input type="radio" name="status_checkout" value="pronto"> Sim, 100% pronto</label>
+                    <label class="radio-item"><input type="radio" name="status_checkout" value="configurar"> Não, configurar</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="status_checkout:pronto">
-                <label>Link Checkout:</label>
-                <input type="url" name="link_checkout">
+                <label for="link_checkout">Link do checkout:</label>
+                <input type="url" id="link_checkout" name="link_checkout">
             </div>
             <div class="form-group">
-                <label>Tem Comunidade?</label>
+                <label>Comunidade e Suporte aos Alunos:</label>
                 <div class="radio-group">
                     <label class="radio-item"><input type="radio" name="tem_comunidade" value="sim"> Sim</label>
                     <label class="radio-item"><input type="radio" name="tem_comunidade" value="nao"> Não</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="tem_comunidade:sim">
-                <label>Formato Comunidade:</label>
-                <input type="text" name="formato_comunidade">
+                <label for="formato_comunidade">Qual formato? (WhatsApp, Facebook, Discord):</label>
+                <input type="text" id="formato_comunidade" name="formato_comunidade">
             </div>
             <div class="form-group">
                 <label>Briefing do Produto:</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_briefing" value="pronto"> Pronto</label>
-                    <label class="radio-item"><input type="radio" name="status_briefing" value="construir"> Construir</label>
+                    <label class="radio-item"><input type="radio" name="status_briefing" value="pronto"> Sim, já está pronto</label>
+                    <label class="radio-item"><input type="radio" name="status_briefing" value="construir"> Não, precisa ser construído</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="status_briefing:pronto">
-                <label>Link Briefing:</label>
-                <input type="text" name="link_upload_briefing">
+                <label for="link_upload_briefing">Link do Drive do Briefing:</label>
+                <input type="text" id="link_upload_briefing" name="link_upload_briefing" placeholder="Cole o link aqui">
+                <input type="file" name="file_briefing" style="margin-top: 10px;">
             </div>
             <div class="form-group">
-                <label>Identidade Visual:</label>
+                <label>Identidade Visual (IDV):</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_idv" value="pronto"> Possui</label>
-                    <label class="radio-item"><input type="radio" name="status_idv" value="construir"> Criar</label>
+                    <label class="radio-item"><input type="radio" name="status_idv" value="pronto"> Sim, já possui</label>
+                    <label class="radio-item"><input type="radio" name="status_idv" value="construir"> Não, será criada</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="status_idv:pronto">
-                <label>Link Manual:</label>
-                <input type="text" name="link_upload_idv">
+                <label for="link_upload_idv">Link do Drive do Manual da Marca:</label>
+                <input type="text" id="link_upload_idv" name="link_upload_idv" placeholder="Cole o link aqui">
+                <input type="file" name="file_idv" style="margin-top: 10px;">
             </div>
             <div class="form-group">
-                <label>Esteira de Ofertas:</label>
-                <textarea name="esteira_ofertas"></textarea>
+                <label for="esteira_ofertas">Esteira de Ofertas (Order Bumps, Upsells e Downsells):</label>
+                <textarea id="esteira_ofertas" name="esteira_ofertas"></textarea>
             </div>
         </fieldset>
 
-        <!-- ⚙️ Bloco 4 -->
+        <!-- ⚙️ Bloco 4: Estrutura Operacional -->
         <fieldset>
-            <legend>⚙️ Bloco 4: Estrutura Operacional</legend>
+            <legend>⚙️ Bloco 4: Estrutura Operacional, Ferramentas e Equipe</legend>
             <div class="form-group">
-                <label>Mapeamento da Equipe:</label>
-                <textarea name="mapeamento_equipe" required></textarea>
+                <label for="mapeamento_equipe">Mapeamento da Equipe:</label>
+                <textarea id="mapeamento_equipe" name="mapeamento_equipe" required></textarea>
             </div>
             <div class="form-group">
-                <label>Plataforma de Demandas:</label>
+                <label>Plataforma de Demandas (ClickUp, Asana, Trello):</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_plataforma_demandas" value="pronto"> Estruturada</label>
-                    <label class="radio-item"><input type="radio" name="status_plataforma_demandas" value="estruturar"> Criar do Zero</label>
+                    <label class="radio-item"><input type="radio" name="status_plataforma_demandas" value="pronto"> Já temos estruturado</label>
+                    <label class="radio-item"><input type="radio" name="status_plataforma_demandas" value="estruturar"> Estruturar do zero</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="status_plataforma_demandas:pronto">
-                <label>Link Plataforma:</label>
-                <input type="url" name="link_plataforma_demandas">
+                <label for="link_plataforma_demandas">Inserir link:</label>
+                <input type="url" id="link_plataforma_demandas" name="link_plataforma_demandas">
             </div>
             <div class="form-group">
-                <label>Plataforma de Arquivos:</label>
+                <label>Plataforma de Arquivos (Drive, Dropbox):</label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="status_plataforma_arquivos" value="pronto"> Possui Drive</label>
-                    <label class="radio-item"><input type="radio" name="status_plataforma_arquivos" value="estruturar"> Criar</label>
+                    <label class="radio-item"><input type="radio" name="status_plataforma_arquivos" value="pronto"> Já temos uma pasta padrão</label>
+                    <label class="radio-item"><input type="radio" name="status_plataforma_arquivos" value="estruturar"> Estruturar do zero</label>
                 </div>
             </div>
             <div class="form-group sub-group hidden" data-show-if="status_plataforma_arquivos:pronto">
-                <label>Link Drive:</label>
-                <input type="url" name="link_plataforma_arquivos">
+                <label for="link_plataforma_arquivos">Inserir link:</label>
+                <input type="url" id="link_plataforma_arquivos" name="link_plataforma_arquivos">
             </div>
             <div class="form-group">
-                <label>Cofre de Senhas:</label>
-                <input type="url" name="link_cofre_senhas">
+                <label for="link_cofre_senhas">Cofre de Senhas e Acessos:</label>
+                <input type="url" id="link_cofre_senhas" name="link_cofre_senhas">
             </div>
             <div class="form-group">
-                <label>Orçamento Financeiro:</label>
-                <textarea name="orcamento_financeiro" required></textarea>
+                <label for="orcamento_financeiro">Orçamento Financeiro (Budget):</label>
+                <textarea id="orcamento_financeiro" name="orcamento_financeiro" required></textarea>
             </div>
         </fieldset>
 
-        <!-- 🎯 Bloco 5 -->
+        <!-- 🎯 Bloco 5: Estratégia e Metas -->
         <fieldset>
             <legend>🎯 Bloco 5: Estratégia e Metas</legend>
             <div class="grid-2">
-                <div class="form-group"><label>Meta Vendas:</label><input type="text" name="meta_vendas" required></div>
-                <div class="form-group"><label>Meta Tráfego:</label><input type="text" name="meta_trafego" required></div>
+                <div class="form-group"><label for="meta_vendas">Metas de Vendas:</label><input type="text" id="meta_vendas" name="meta_vendas" required></div>
+                <div class="form-group"><label class="TIME-STAMP" for="meta_trafego">Metas de Tráfego:</label><input type="text" id="meta_trafego" name="meta_trafego" required></div>
             </div>
-            <div class="form-group"><label>Meta Engajamento:</label><input type="text" name="meta_engajamento" required></div>
-            
-            <div class="form-group" style="margin-top:15px;">
-                <label>Modelo de Vendas:</label>
+            <div class="form-group">
+                <label for="meta_engajamento">Metas de Engajamento:</label>
+                <input type="text" id="meta_engajamento" name="meta_engajamento" required>
+            </div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid var(--border-color);">
+            <div class="form-group">
+                <label><strong>Modelo de Vendas / Estratégia Digital:</strong></label>
                 <div class="radio-group">
-                    <label class="radio-item"><input type="radio" name="modelo_vendas" value="classico" required> Clássico</label>
+                    <label class="radio-item"><input type="radio" name="modelo_vendas" value="classico" required> Lançamento Clássico</label>
                     <label class="radio-item"><input type="radio" name="modelo_vendas" value="pago"> Lançamento Pago</label>
-                    <label class="radio-item"><input type="radio" name="modelo_vendas" value="meteorico"> Meteórico</label>
+                    <label class="radio-item"><input type="radio" name="modelo_vendas" value="meteorico"> Lançamento Meteórico</label>
                     <label class="radio-item"><input type="radio" name="modelo_vendas" value="perpetuo"> Perpétuo</label>
                 </div>
             </div>
             <div class="form-group">
-                <label>Integração Presencial?</label>
+                <label><strong>Integração Presencial:</strong></label>
                 <div class="radio-group">
                     <label class="radio-item"><input type="radio" name="integracao_presencial" value="sim" required> Sim</label>
                     <label class="radio-item"><input type="radio" name="integracao_presencial" value="nao"> Não</label>
@@ -440,17 +435,48 @@
             </div>
         </fieldset>
 
-        <!-- 🅰️ BIFURCAÇÃO A: Clássico -->
+        <!-- 🅰️ BIFURCAÇÃO A: Lançamento Clássico -->
         <div id="bifurcacao_classico" class="hidden" data-show-if="modelo_vendas:classico">
             <h3 class="bifurcation-title">🅰️ BIFURCAÇÃO A: Lançamento Clássico</h3>
             <fieldset>
-                <legend>🗓️ Cronograma Mestre</legend>
-                <div class="form-group"><label>Nome do Evento:</label><input type="text" name="a_nome_evento"></div>
+                <legend>🗓️ A1: Cronograma Mestre</legend>
+                <div class="form-group"><label for="a_nome_evento">Nome do Evento Gratuito:</label><input type="text" id="a_nome_evento" name="a_nome_evento"></div>
+                <div class="form-group">
+                    <label>Briefing do Evento Clássico:</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_status_briefing" value="sim"> Sim</label>
+                        <label class="radio-item"><input type="radio" name="a_status_briefing" value="nao"> Não</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_status_briefing:sim">
+                    <label>Link ou Upload do Briefing:</label>
+                    <input type="text" name="a_link_briefing" placeholder="Link do Drive">
+                    <input type="file" name="a_file_briefing" style="margin-top: 10px;">
+                </div>
                 <div class="grid-2">
-                    <div class="form-group"><label>Início Captação:</label><input type="datetime-local" name="a_data_captacao"></div>
-                    <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="a_data_abertura_carrinho"></div>
+                    <div class="form-group"><label>Início Aquecimento Orgânico:</label><input type="datetime-local" name="a_data_aquecimento_organico"></div>
+                    <div class="form-group"><label>Início da Captação:</label><input type="datetime-local" name="a_data_captacao"></div>
+                    <div class="form-group"><label>Início Aquecimento Lembretes:</label><input type="datetime-local" name="a_data_lembretes"></div>
+                    <div class="form-group"><label>Abertura do Carrinho:</label><input type="datetime-local" name="a_data_abertura_carrinho"></div>
+                    <div class="form-group"><label>Início Tráfego Vendas:</label><input type="datetime-local" name="a_data_trafego_vendas"></div>
+                    <div class="form-group"><label>Encerramento do Carrinho:</label><input type="datetime-local" name="a_data_encerramento"></div>
+                    <!-- CORRIGIDO: Data Direta Nativa -->
                     <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="a_data_debriefing"></div>
                 </div>
+            </fieldset>
+            <fieldset>
+                <legend>🎥 A2: Dinâmica do Evento (CPLs)</legend>
+                <div class="form-group">
+                    <label>Formato de Entrega:</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_formato_cpls" value="gravado"> 100% Gravado</label>
+                        <label class="radio-item"><input type="radio" name="a_formato_cpls" value="ao_vivo"> 100% Ao Vivo</label>
+                        <label class="radio-item"><input type="radio" name="a_formato_cpls" value="hibrido_duvidas"> Híbrido (Dúvidas)</label>
+                        <label class="radio-item"><input type="radio" name="a_formato_cpls" value="hibrido_sessoes"> Híbrido (Sessões)</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_formato_cpls:hibrido_duvidas"><label>Dinâmica:</label><textarea name="a_explicacao_hibrido"></textarea></div>
+                <div class="form-group sub-group hidden" data-show-if="a_formato_cpls:hibrido_sessoes"><label>Dinâmica:</label><textarea name="a_explicacao_hibrido_alt"></textarea></div>
                 <div class="form-group">
                     <label>Quantas Aulas/CPLs teremos?</label>
                     <select id="a_qtd_cpls" name="a_qtd_cpls">
@@ -461,24 +487,225 @@
                         <option value="4">4 CPLs ou mais</option>
                     </select>
                 </div>
+                <div class="form-group sub-group hidden" data-show-if="a_qtd_cpls:4"><label>Especificar:</label><input type="number" name="a_qtd_cpls_extra"></div>
                 <div id="a_datas_cpls" class="grid-2 sub-group" style="display:none;">
                     <div class="form-group a-cpl-1"><label>Data CPL 1:</label><input type="datetime-local" name="a_data_cpl_1"></div>
                     <div class="form-group a-cpl-2"><label>Data CPL 2:</label><input type="datetime-local" name="a_data_cpl_2"></div>
                     <div class="form-group a-cpl-3"><label>Data CPL 3:</label><input type="datetime-local" name="a_data_cpl_3"></div>
                     <div class="form-group a-cpl-4"><label>Data CPL 4+:</label><input type="datetime-local" name="a_data_cpl_4"></div>
                 </div>
+                <div class="form-group"><label>Ferramenta Transmissão:</label><input type="text" name="a_ferramenta_transmissao"></div>
+                <div class="form-group"><label>O Pitch de Vendas será onde?</label><input type="text" name="a_pitch_onde"></div>
+                <div class="form-group">
+                    <label>Status do Pitch:</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_status_pitch" value="pronto"> Pronto</label>
+                        <label class="radio-item"><input type="radio" name="a_status_pitch" value="construir"> Construir</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_status_pitch:pronto"><label>Link roteiro:</label><input type="url" name="a_link_pitch"></div>
+            </fieldset>
+            <fieldset>
+                <legend>📱 A3 & A4: Comunidade e Canais</legend>
+                <div class="form-group">
+                    <label>Teremos Grupos de WhatsApp?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_grupo_wpp" value="sim"> Sim</label>
+                        <label class="radio-item"><input type="radio" name="a_grupo_wpp" value="nao"> Não</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_grupo_wpp:sim">
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_formato_grupo_wpp" value="padrao"> Grupo Padrão</label>
+                        <label class="radio-item"><input type="radio" name="a_formato_grupo_wpp" value="comunidade"> Comunidade</label>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Canais de Divulgação:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" value="meta_ads"> Meta Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" value="google_ads"> Google Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" value="youtube_ads"> YouTube Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" id="a_canal_email" value="email_marketing"> E-mail Marketing</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_canal_email"><input type="text" name="a_ferramenta_email" placeholder="Ferramenta E-mail"></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" id="a_canal_wpp" value="wpp_massa"> Disparo Massa (WPP)</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_canal_wpp"><input type="text" name="a_ferramenta_wpp" placeholder="Ferramenta WPP"></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" id="a_canal_sms" value="sms"> SMS</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_canal_sms"><input type="text" name="a_ferramenta_sms" placeholder="Ferramenta SMS"></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" id="a_canal_call" value="ligacoes"> Ligações / Robô</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_canal_call"><input type="text" name="a_ferramenta_call" placeholder="Ferramenta Ligações"></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_canais" id="a_canal_outros" value="outros"> Outros</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_canal_outros"><input type="text" name="a_ferramenta_outros" placeholder="Especificar"></div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>📊 A5: Escopo e Volumes</legend>
+                <div class="grid-2">
+                    <div class="form-group"><label>Volume E-mails:</label><input type="text" name="a_volume_emails"></div>
+                    <div class="form-group"><label>Volume Msg (1a1):</label><input type="text" name="a_volume_msg_1a1"></div>
+                    <div class="form-group"><label>Volume Msg (Grupos):</label><input type="text" name="a_volume_msg_grupos"></div>
+                    <div class="form-group"><label>Volume Criativos:</label><input type="text" name="a_volume_criativos"></div>
+                </div>
+                <div class="form-group hidden" id="a_div_volume_extra"><label>Volume Extras:</label><textarea name="a_volume_extras"></textarea></div>
+            </fieldset>
+            <fieldset>
+                <legend>🌐 A6: Estrutura de Páginas</legend>
+                <div class="form-group"><label>Domínio Principal:</label><input type="text" name="a_dominio_principal"></div>
+                <div class="form-group">
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_status_dominio" value="pronto"> Possui acesso</label>
+                        <label class="radio-item"><input type="radio" name="a_status_dominio" value="adquirir"> Adquirir/Configurar</label>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group"><label>Plataforma Registro:</label><input type="text" name="a_plataforma_registro"></div>
+                    <div class="form-group"><label>Hospedagem:</label><input type="text" name="a_plataforma_hospedagem"></div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label>Páginas a construir:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" value="captura"> Página de Captura</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" id="a_pg_obrigado_cpl" value="obrigado_cpl"> Obrigado Captura</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_pg_obrigado_cpl"><label>CTA/Destino:</label><textarea name="a_cta_obrigado_cpl"></textarea></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" value="transmissao"> Páginas Transmissão</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" value="vendas"> Página de Vendas</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" id="a_pg_obrigado_venda" value="obrigado_venda"> Obrigado Venda</label>
+                        <div class="sub-group hidden" data-show-if-checked="a_pg_obrigado_venda"><label>CTA/Destino:</label><textarea name="a_cta_obrigado_venda"></textarea></div>
+                        <label class="checkbox-item"><input type="checkbox" name="a_paginas" value="lista_espera"> Lista de Espera</label>
+                    </div>
+                </div>
+                <div class="form-group"><label>Swipe/Referência:</label><input type="url" name="a_swipe_paginas"></div>
+                <div class="form-group">
+                    <label>Mecanismo de Captura:</label>
+                    <select name="a_mecanismo_captura">
+                        <option value="">Selecione...</option>
+                        <option value="popup">Pop-up</option>
+                        <option value="estatico">Formulário Estático</option>
+                        <option value="livre">Equipe define</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Pesquisa de Público?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_tem_pesquisa" value="sim"> Sim</label>
+                        <label class="radio-item"><input type="radio" name="a_tem_pesquisa" value="na"> Não</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_tem_pesquisa:sim"><label>Link ou info:</label><input type="text" name="a_link_pesquisa"></div>
+            </fieldset>
+            <fieldset>
+                <legend>🎯 A7: Fases do Tráfego Pago</legend>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="a_fases_trafego" value="captacao"> Captação</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_fases_trafego" value="aquecimento"> Aquecimento</label>
+                        <label class="checkbox-item"><input type="checkbox" name="a_fases_trafego" value="vendas"> Vendas</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Tagueamento instalado?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_status_pixel" value="pronto"> Instalação pronta</label>
+                        <label class="radio-item"><input type="radio" name="a_status_pixel" value="configurar"> Configurar do zero</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Estratégia Mapa Funil:</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="a_mapa_funil" value="texto"> Em Texto</label>
+                        <label class="radio-item"><input type="radio" name="a_mapa_funil" value="visual"> Visual (Link)</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="a_mapa_funil:texto"><textarea name="a_mapa_funil_texto"></textarea></div>
+                <div class="form-group sub-group hidden" data-show-if="a_mapa_funil:visual"><input type="text" name="a_mapa_funil_link" placeholder="Link do Funil"></div>
             </fieldset>
         </div>
 
-        <!-- ☄️ BIFURCAÇÃO B: Meteórico -->
+        <!-- ☄️ BIFURCAÇÃO B: Lançamento Meteórico -->
         <div id="bifurcacao_meteorico" class="hidden" data-show-if="modelo_vendas:meteorico">
             <h3 class="bifurcation-title">☄️ BIFURCAÇÃO B: Meteórico</h3>
             <fieldset>
-                <legend>🗓️ Cronograma Meteórico</legend>
+                <legend>🗓️ B1: Cronograma Meteórico</legend>
+                <div class="form-group"><label>Nome do Grupo:</label><input type="text" name="b_nome_grupo"></div>
                 <div class="grid-2">
-                    <div class="form-group"><label>Início Captação:</label><input type="datetime-local" name="b_data_captacao"></div>
+                    <div class="form-group"><label>Aquecimento Orgânico:</label><input type="datetime-local" name="b_data_aquecimento"></div>
+                    <div class="form-group"><label>Início da Captação:</label><input type="datetime-local" name="b_data_captacao"></div>
+                    <div class="form-group"><label>Passo 1 (Boas-vindas):</label><input type="date" name="b_data_p1"></div>
+                    <div class="form-group"><label>Passo 2 (Oferta):</label><input type="datetime-local" name="b_data_p2"></div>
+                    <div class="form-group"><label>Passo 3 (Abertura):</label><input type="datetime-local" name="b_data_p3"></div>
                     <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="b_data_carrinho"></div>
+                    <div class="form-group"><label>Início Tráfego Vendas:</label><input type="datetime-local" name="b_data_trafego_vendas"></div>
+                    <div class="form-group"><label>Encerramento Carrinho:</label><input type="datetime-local" name="b_data_encerramento"></div>
+                    <!-- CORRIGIDO: Data Direta Nativa -->
                     <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="b_data_debriefing"></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>🎥 B2 & B3: Dinâmica e WhatsApp</legend>
+                <div class="form-group">
+                    <label>Teremos Live Tira-Dúvidas?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="b_tem_live" value="sim"> Sim</label>
+                        <label class="radio-item"><input type="radio" name="b_tem_live" value="nao"> Não, só grupos</label>
+                    </div>
+                </div>
+                <div class="sub-group hidden" data-show-if="b_tem_live:sim">
+                    <div class="form-group"><label>Data/Hora Live:</label><input type="datetime-local" name="b_data_live"></div>
+                    <div class="form-group"><label>Ferramenta Live:</label><input type="text" name="b_ferramenta_live"></div>
+                    <div class="form-group">
+                        <label>Status do Pitch:</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="b_status_pitch" value="pronto"> Pronto</label>
+                            <label class="radio-item"><input type="radio" name="b_status_pitch" value="construir"> Construir</label>
+                        </div>
+                    </div>
+                    <div class="form-group sub-group hidden" data-show-if="b_status_pitch:pronto"><input type="url" name="b_link_pitch"></div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label>Copy das Mensagens:</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="b_status_copy" value="pronto"> Pronto</label>
+                        <label class="radio-item"><input type="radio" name="b_status_copy" value="construir"> Construir</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="b_status_copy:pronto"><input type="url" name="b_link_copy"></div>
+                <div class="form-group" style="margin-top:20px;"><label>Ferramenta Gestão Grupos:</label><input type="text" name="b_ferramenta_wpp"></div>
+                <div class="form-group">
+                    <label>Formato de Grupo:</label>
+                    <select name="b_formato_grupo">
+                        <option value="padrao">Grupo Padrão</option>
+                        <option value="comunidade">Comunidade</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Estimativa de Grupos:</label><input type="text" name="b_volume_grupos"></div>
+            </fieldset>
+            <fieldset>
+                <legend>📣 B4 & B5: Canais e Volumes</legend>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="b_canais" value="meta_ads"> Meta Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="b_canais" value="google_ads"> Google Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="b_canais" id="b_canal_email" value="email"> E-mail</label>
+                        <div class="sub-group hidden" data-show-if-checked="b_canal_email"><input type="text" name="b_ferramenta_email"></div>
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group"><label>Volume E-mails:</label><input type="text" name="b_vol_emails"></div>
+                    <div class="form-group"><label>Volume Msg 1a1:</label><input type="text" name="b_vol_msg_1a1"></div>
+                    <div class="form-group"><label>Volume Criativos:</label><input type="text" name="b_vol_criativos"></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>🌐 B6 & B7: Páginas e Funil</legend>
+                <div class="form-group"><label>Domínio Principal:</label><input type="text" name="b_dominio"></div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="b_paginas" value="captura"> Captura Convite</label>
+                        <label class="checkbox-item"><input type="checkbox" name="b_paginas" id="b_pg_obg" value="obrigado"> Obrigado Grupo</label>
+                        <div class="sub-group hidden" data-show-if-checked="b_pg_obg"><textarea name="b_cta_obrigado"></textarea></div>
+                        <label class="checkbox-item"><input type="checkbox" name="b_paginas" value="vendas"> Vendas</label>
+                    </div>
                 </div>
             </fieldset>
         </div>
@@ -487,10 +714,56 @@
         <div id="bifurcacao_perpetuo" class="hidden" data-show-if="modelo_vendas:perpetuo">
             <h3 class="bifurcation-title">♾️ BIFURCAÇÃO C: Funil Perpétuo</h3>
             <fieldset>
-                <legend>🗓️ Cronograma Perpétuo</legend>
+                <legend>C1 & C2: Estrutura Perpétuo</legend>
+                <div class="form-group">
+                    <label>Tipo de Funil Principal:</label>
+                    <select name="c_tipo_funil">
+                        <option value="direto">Direto para Página de Vendas</option>
+                        <option value="vsl">VSL Longa</option>
+                        <option value="isca">Isca Digital</option>
+                        <option value="webinar">Webinar Perpétuo</option>
+                    </select>
+                </div>
                 <div class="grid-2">
-                    <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="c_data_abertura"></div>
-                    <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="c_data_debriefing"></div>
+                    <div class="form-group"><label>Data Início Tráfego:</label><input type="datetime-local" name="c_data_trafego"></div>
+                    <div class="form-group"><label>Data Fim/Revisão:</label><input type="datetime-local" name="c_data_Campanha_entertainment"></div>
+                    <!-- CORRIGIDO: Data Direta Nativa -->
+                    <div class="form-group"><label>Data de Alinhamento (Debriefing):</label><input type="date" name="c_data_debriefing"></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>C3 & C4: Orçamentos e Canais</legend>
+                <div class="grid-2">
+                    <div class="form-group"><label>Budget Tráfego:</label><input type="text" name="c_orcamento_trafego"></div>
+                    <div class="form-group"><label>CPA Desejado:</label><input type="text" name="c_cpa"></div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label>Canais:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="c_canais" value="meta_ads"> Meta Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="c_canais" value="google_ads"> Google Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="c_canais" id="c_canal_email_p" value="email"> E-mail</label>
+                        <div class="sub-group hidden" data-show-if-checked="c_canal_email_p"><input type="text" name="c_ferramenta_email"></div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>C5 & C6: Páginas e Automação</legend>
+                <div class="form-group"><label>Domínio:</label><input type="text" name="c_dominio"></div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="c_paginas" value="captura"> Captura Isca</label>
+                        <label class="checkbox-item"><input type="checkbox" name="c_paginas" value="vendas"> Página de Vendas</label>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:20px;"><label>Régua de E-mails (Qtd/Estrutura):</label><textarea name="c_regua_email"></textarea></div>
+                <div class="form-group">
+                    <label>Recuperação de Carrinho?</label>
+                    <select name="c_recuperacao">
+                        <option value="sim_email_wpp">E-mail + WhatsApp</option>
+                        <option value="sim_email">Apenas E-mail</option>
+                        <option value="na">Não</option>
+                    </select>
                 </div>
             </fieldset>
         </div>
@@ -517,12 +790,126 @@
                         <option value="4">4 Aulas/CPLs ou mais</option>
                     </select>
                 </div>
+                <!-- CORRIGIDO: Datas dinâmicas abrindo perfeitamente no Pago -->
                 <div id="d_datas_cpls" class="grid-2 sub-group" style="display:none;">
                     <div class="form-group d-cpl-1"><label>Data Aula/CPL 1:</label><input type="datetime-local" name="d_data_cpl_1"></div>
                     <div class="form-group d-cpl-2"><label>Data Aula/CPL 2:</label><input type="datetime-local" name="d_data_cpl_2"></div>
                     <div class="form-group d-cpl-3"><label>Data Aula/CPL 3:</label><input type="datetime-local" name="d_data_cpl_3"></div>
                     <div class="form-group d-cpl-4"><label>Data Aula/CPL 4+:</label><input type="datetime-local" name="d_data_cpl_4"></div>
                 </div>
+                <div class="grid-2" style="margin-top:20px;">
+                    <div class="form-group"><label>Valor Ingresso:</label><input type="text" name="d_valor_ingresso"></div>
+                    <div class="form-group"><label>Plataforma Checkout Ingresso:</label><input type="text" name="d_plat_ingresso"></div>
+                </div>
+                <div class="form-group"><label>Esteira do Ingresso (VIP, Bump):</label><textarea name="d_esteira_ingresso"></textarea></div>
+            </fieldset>
+            <fieldset>
+                <legend>D3 & D4: Entrega e Suporte</legend>
+                <div class="form-group">
+                    <label>Formato Evento Pago:</label>
+                    <select name="d_formato_evento">
+                        <option value="ao_vivo">Ao Vivo</option>
+                        <option value="hibrido">Híbrido</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Ferramenta Transmissão:</label><input type="text" name="d_ferramenta_transmissao"></div>
+                <div class="form-group"><label>Onde será feito o Pitch?</label><input type="text" name="d_pitch_onde"></div>
+                <div class="form-group">
+                    <label>Teremos Grupos VIP compradores?</label>
+                    <select id="d_grupo_vip" name="d_grupo_vip">
+                        <option value="sim">Sim</option>
+                        <option value="nao">Não</option>
+                    </select>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="d_grupo_vip:sim"><label>Formato Grupo VIP:</label><input type="text" name="d_formato_grupo_vip"></div>
+            </fieldset>
+            <fieldset>
+                <legend>D5 & D6: Tráfego e Estrutura</legend>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="d_canais" value="meta_ads"> Meta Ads</label>
+                        <label class="checkbox-item"><input type="checkbox" name="d_canais" value="google_ads"> Google Ads</label>
+                    </div>
+                </div>
+                <div class="grid-2" style="margin-top:15px;">
+                    <div class="form-group"><label>Volume Criativos:</label><input type="text" name="d_vol_criativos"></div>
+                    <div class="form-group"><label>Volume Mensagens:</label><input type="text" name="d_vol_mensagens"></div>
+                </div>
+                <div class="form-group" style="margin-top:20px;">
+                    <label>Páginas Necessárias:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="d_paginas" value="vendas_evento"> Vendas Ingresso</label>
+                        <label class="checkbox-item"><input type="checkbox" name="d_paginas" id="d_pg_obg_ing" value="obrigado_ingresso"> Obrigado Ingresso</label>
+                        <div class="sub-group hidden" data-show-if-checked="d_pg_obg_ing"><label>CTA Destino:</label><textarea name="d_cta_obg_ing"></textarea></div>
+                        <label class="checkbox-item"><input type="checkbox" name="d_paginas" value="vendas_produto"> Vendas Produto Final</label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- 🎟️ BIFURCAÇÃO E: Evento Presencial -->
+        <div id="bifurcacao_presencial" class="hidden" data-show-if="integracao_presencial:sim">
+            <h3 class="bifurcation-title">🎟️ BIFURCAÇÃO E: Evento Presencial</h3>
+            <fieldset>
+                <legend>E1 & E2: Logística e Lotes</legend>
+                <div class="form-group"><label>Nome Evento Presencial:</label><input type="text" name="e_nome_evento"></div>
+                <div class="grid-2">
+                    <div class="form-group"><label>Datas/Horários:</label><input type="text" name="e_datas_horas"></div>
+                    <div class="form-group"><label>Local do Evento:</label><input type="text" name="e_local"></div>
+                    <div class="form-group"><label>Capacidade Pública:</label><input type="number" name="e_capacidade"></div>
+                    <div class="form-group"><label>Plataforma Ingressos:</label><input type="text" name="e_plataforma"></div>
+                </div>
+                <div class="form-group" style="margin-top:20px;"><label>Categorias Lotes/Valores:</label><textarea name="e_categorias"></textarea></div>
+                <div class="form-group">
+                    <label>Estratégia Virada Lote:</label>
+                    <select name="e_virada_lote">
+                        <option value="data">Por Data</option>
+                        <option value="qtd">Por Qtd</option>
+                        <option value="na">Preço Único</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Order Bumps/Upsells:</label><textarea name="e_upsells"></textarea></div>
+            </fieldset>
+            <fieldset>
+                <legend>E3 & E4: Estratégia de Palco</legend>
+                <div class="form-group">
+                    <label>Raio Atuação Tráfego:</label>
+                    <select name="e_trafego_local">
+                        <option value="local">Local/Regional</option>
+                        <option value="nacional">Nacional</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Principal Canal Comunicação:</label>
+                    <select name="e_comunicacao">
+                        <option value="email">E-mail Marketing</option>
+                        <option value="grupo_wpp">Grupo WhatsApp</option>
+                        <option value="wpp_1a1">WhatsApp 1 para 1</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Teremos Pitch de Palco (High-Ticket)?</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="e_tem_pitch" value="sim"> Sim</label>
+                        <label class="radio-item"><input type="radio" name="e_tem_pitch" value="na"> Não</label>
+                    </div>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="e_tem_pitch:sim">
+                    <label>Demandas Operacionais:</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="e_demandas_pitch" value="slides"> Estrutura de Slides</label>
+                        <label class="checkbox-item"><input type="checkbox" name="e_demandas_pitch" value="forms_fisicos"> Contratos/Forms Físicos</label>
+                        <label class="checkbox-item"><input type="checkbox" name="e_demandas_pitch" value="checkout_digital"> Checkout Link Rápido</label>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>E5: Volumes Criativos</legend>
+                <div class="grid-2">
+                    <div class="form-group"><label>Volumes Criativos Ads:</label><input type="text" name="e_vol_criativos"></div>
+                    <div class="form-group"><label>Volume Mensagens:</label><input type="text" name="e_vol_mensagens"></div>
+                </div>
+                <div class="form-group" style="margin-top:15px;"><label>Observações/Estratégia Adicional:</label><textarea name="e_estrategia_add"></textarea></div>
             </fieldset>
         </div>
 
@@ -536,10 +923,10 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // !!! COLOQUE A SUA URL DO APPS SCRIPT AQUI !!!
-        const webhookUrl = 'AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ'; 
+        // !!! COLOQUE A SUA URL REAL DO APPS SCRIPT AQUI !!!
+        const webhookUrl = 'hhttps://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
-        // --- 1. PUXA A LOGO AUTOMATICAMENTE DA PLANILHA ---
+        // --- 1. PUXA A LOGO FIXA DA PLANILHA ---
         const logoImage = document.getElementById('logo_image');
         const logoLoading = document.getElementById('logo_loading');
         
@@ -551,12 +938,12 @@
                     logoImage.style.display = 'block';
                     if(logoLoading) logoLoading.style.display = 'none';
                 } else {
-                    if(logoLoading) logoLoading.innerText = 'Defina a logo na aba CONFIG_LOGO da planilha';
+                    if(logoLoading) logoLoading.innerText = 'Adicione a logo na aba CONFIG_LOGO da planilha';
                 }
             })
             .catch(() => { if(logoLoading) logoLoading.innerText = 'Logo indisponível'; });
 
-        // --- 2. Theme Toggle (Invertido: Dark é padrão, troca para Light) ---
+        // --- 2. Theme Toggle (Padrão: Dark, Inverte para Light) ---
         const themeToggle = document.getElementById('theme_toggle');
         themeToggle.addEventListener('click', () => {
             const isLight = document.documentElement.getAttribute('data-theme') === 'light';
@@ -569,7 +956,7 @@
             }
         });
 
-        // --- 3. Motor de Lógica Condicional ---
+        // --- 3. Motor de Lógica Condicional Completo ---
         function evaluateLogic() {
             document.querySelectorAll('[data-show-if]').forEach(el => {
                 const parts = el.getAttribute('data-show-if').split(':');
@@ -583,7 +970,23 @@
                 else el.classList.add('hidden');
             });
 
-            // Controle de CPLs do Clássico
+            document.querySelectorAll('[data-show-if-checked]').forEach(el => {
+                const checkboxId = el.getAttribute('data-show-if-checked');
+                const checkbox = document.getElementById(checkboxId);
+                if (checkbox && checkbox.checked) el.classList.remove('hidden');
+                else el.classList.add('hidden');
+            });
+
+            // Volumes condicionais extras de canais em A
+            const divExtraA = document.getElementById('a_div_volume_extra');
+            if(divExtraA) {
+                const sms = document.getElementById('a_canal_sms');
+                const call = document.getElementById('a_canal_outros');
+                if ((sms && sms.checked) || (call && call.checked)) divExtraA.classList.remove('hidden');
+                else divExtraA.classList.add('hidden');
+            }
+
+            // Controle de Aulas do Clássico (A)
             const qtdCpls = document.getElementById('a_qtd_cpls');
             const datasCplsBox = document.getElementById('a_datas_cpls');
             if(qtdCpls && datasCplsBox) {
@@ -595,7 +998,7 @@
                 }
             }
 
-            // Controle de CPLs do Lançamento Pago
+            // Controle de Aulas do Pago (D)
             const dQtdCpls = document.getElementById('d_qtd_cpls');
             const dDatasCplsBox = document.getElementById('d_datas_cpls');
             if(dQtdCpls && dDatasCplsBox) {
@@ -609,19 +1012,34 @@
         }
 
         document.addEventListener('change', evaluateLogic);
+        document.addEventListener('input', evaluateLogic);
         evaluateLogic();
 
-        // --- 4. Envio do Formulário ---
+        // --- 4. Envio Estruturado dos Dados ---
         const form = document.getElementById('onboarding_form');
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             document.getElementById('btn_submit').disabled = true;
-            document.getElementById('btn_submit').innerText = '⏳ Gravando de Forma Fixa...';
+            document.getElementById('btn_submit').innerText = '⏳ Gravando Respostas Fixas...';
 
             const formData = new FormData(form);
-            const urlSearchParams = new URLSearchParams();
+            const groupedData = {};
+
             for (let [key, value] of formData.entries()) {
-                urlSearchParams.append(key, value);
+                if (value instanceof File) {
+                    value = value.name ? `[Arquivo: ${value.name}]` : '';
+                    if(!value) continue;
+                }
+                if (groupedData[key]) {
+                    groupedData[key].push(value);
+                } else {
+                    groupedData[key] = [value];
+                }
+            }
+
+            const urlSearchParams = new URLSearchParams();
+            for (const key in groupedData) {
+                urlSearchParams.append(key, groupedData[key].join(', '));
             }
 
             try {
@@ -631,8 +1049,9 @@
                 document.getElementById('success_message').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (error) {
-                alert('Erro de rede. Tente novamente.');
+                alert('Erro de envio. Verifique a conexão de rede.');
                 document.getElementById('btn_submit').disabled = false;
+                document.getElementById('btn_submit').innerText = '🚀 Enviar Informações';
             }
         });
     });
