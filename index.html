@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onboarding Operacional - S.O.L</title>
+    <title>Onboarding Operational - S.O.L</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -286,11 +286,13 @@
 
     <div class="logo-upload-container">
         <div class="logo-preview-box" id="logo_preview_box">
-            <img id="logo_image" src="https://sua-url-da-logo.com/imagem-logo.png" alt="Logo do Projeto">
+            <img id="logo_image" src="" alt="Logo do Projeto">
         </div>
     </div>
 
     <form id="onboarding_form">
+        <input type="hidden" id="logo_personalizada_url" name="logo_personalizada_url">
+
         <fieldset>
             <legend>📋 Bloco 1: Identificação e Contato (O Especialista)</legend>
             <div class="form-group">
@@ -322,6 +324,15 @@
 
         <fieldset>
             <legend>🚀 Bloco 2: Visão Geral do Projeto</legend>
+            
+            <div class="form-group">
+                <label>Já existe o espaço do especialista dentro da plataforma de gestão?</label>
+                <div class="radio-group">
+                    <label class="radio-item"><input type="radio" name="existe_espaco_especialista" value="sim" required> Sim</label>
+                    <label class="radio-item"><input type="radio" name="existe_espaco_especialista" value="nao"> Não</label>
+                </div>
+            </div>
+
             <div class="form-group">
                 <label for="nome_projeto">Nome Oficial do Projeto/Lançamento:</label>
                 <span class="help-text">O nome da campanha/evento em si. Ex: A Semana do Novo Dinheiro</span>
@@ -544,7 +555,7 @@
                     <label>Briefing do Evento Clássico:</label>
                     <div class="radio-group">
                         <label class="radio-item"><input type="radio" name="a_status_briefing" value="sim"> Já temos (Anexar)</label>
-                        <label class="radio-item"><input type="radio" name="a_status_briefing" value="nao"> Não temos</label>
+                        <label class="radio-item"><input type="radio" name="a_status_briefing" value="na"> Não temos</label>
                     </div>
                 </div>
                 <div class="form-group sub-group hidden" data-show-if="a_status_briefing:sim">
@@ -1057,10 +1068,32 @@
                     <input type="file" name="d_file_briefing" style="margin-top: 10px;">
                 </div>
                 <div class="grid-2">
+                    <div class="form-group"><label>Data de Aquecimento (Lembrete):</label><input type="datetime-local" name="d_data_aquecimento_lembrete"></div>
                     <div class="form-group"><label>Abertura Vendas (Ingresso):</label><input type="datetime-local" name="d_data_abertura_ing"></div>
                     <div class="form-group"><label>Encerramento Vendas (Ingresso):</label><input type="datetime-local" name="d_data_enc_ing"></div>
-                    <div class="form-group"><label>Dias do Evento:</label><textarea name="d_dias_evento"></textarea></div>
-                    <div class="form-group"><label>Abertura Carrinho (Produto):</label><input type="datetime-local" name="d_data_abertura_prod"></div>
+                    <div class="form-group"><label>Abertura Carrinho (Produto Final):</label><input type="datetime-local" name="d_data_abertura_prod"></div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label>Quantas Aulas/CPLs teremos no Evento Pago?</label>
+                    <select id="d_qtd_cpls" name="d_qtd_cpls">
+                        <option value="">Selecione...</option>
+                        <option value="1">1 Aula/CPL</option>
+                        <option value="2">2 Aulas/CPLs</option>
+                        <option value="3">3 Aulas/CPLs</option>
+                        <option value="4">4 Aulas/CPLs ou mais</option>
+                    </select>
+                </div>
+                <div class="form-group sub-group hidden" data-show-if="d_qtd_cpls:4">
+                    <label>Especificar quantidade:</label>
+                    <input type="number" name="d_qtd_cpls_extra">
+                </div>
+
+                <div id="d_datas_cpls" class="grid-2 sub-group" style="display:none;">
+                    <div class="form-group d-cpl-1"><label>Data/Hora Aula/CPL 1:</label><input type="datetime-local" name="d_data_cpl_1"></div>
+                    <div class="form-group d-cpl-2"><label>Data/Hora Aula/CPL 2:</label><input type="datetime-local" name="d_data_cpl_2"></div>
+                    <div class="form-group d-cpl-3"><label>Data/Hora Aula/CPL 3:</label><input type="datetime-local" name="d_data_cpl_3"></div>
+                    <div class="form-group d-cpl-4"><label>Data/Hora Aula/CPL 4+:</label><input type="datetime-local" name="d_data_cpl_4"></div>
                 </div>
 
                 <div class="form-group" style="margin-top:20px;"><label>Valor do Ingresso:</label><input type="text" name="d_valor_ingresso"></div>
@@ -1191,7 +1224,22 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         
-        // --- 1. Theme Toggle ---
+        // --- 1. Leitura Dinâmica da Logo pela URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const logoUrl = urlParams.get('logo');
+        const logoImage = document.getElementById('logo_image');
+        const logoInput = document.getElementById('logo_personalizada_url');
+
+        if (logoUrl) {
+            const decodedUrl = decodeURIComponent(logoUrl);
+            logoImage.src = decodedUrl;
+            logoInput.value = decodedUrl; // Guarda no input para enviar ao sheets
+        } else {
+            // Se não passar nada na URL, use o link padrão da sua marca aqui:
+            logoImage.src = "https://sua-url-da-logo-padrao.com/imagem-logo.png";
+        }
+
+        // --- 2. Theme Toggle ---
         const themeToggle = document.getElementById('theme_toggle');
         themeToggle.addEventListener('click', () => {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -1204,7 +1252,7 @@
             }
         });
 
-        // --- 2. Conditional Logic Engine ---
+        // --- 3. Conditional Logic Engine ---
         function evaluateLogic() {
             // Radio & Select Logic [data-show-if="name:value"]
             document.querySelectorAll('[data-show-if]').forEach(el => {
@@ -1254,7 +1302,7 @@
                 }
             });
 
-            // Handle CPLs dates dynamically
+            // Gerenciamento dinâmico de datas para as CPLs do Clássico (A)
             const qtdCpls = document.getElementById('a_qtd_cpls');
             const datasCplsBox = document.getElementById('a_datas_cpls');
             if(qtdCpls && datasCplsBox) {
@@ -1269,19 +1317,35 @@
                     datasCplsBox.style.display = 'none';
                 }
             }
+
+            // Gerenciamento dinâmico de datas para as Aulas do Pago (D)
+            const dQtdCpls = document.getElementById('d_qtd_cpls');
+            const dDatasCplsBox = document.getElementById('d_datas_cpls');
+            if(dQtdCpls && dDatasCplsBox) {
+                let val = parseInt(dQtdCpls.value);
+                if (val > 0) {
+                    dDatasCplsBox.style.display = 'grid';
+                    document.querySelector('.d-cpl-1').style.display = val >= 1 ? 'block' : 'none';
+                    document.querySelector('.d-cpl-2').style.display = val >= 2 ? 'block' : 'none';
+                    document.querySelector('.d-cpl-3').style.display = val >= 3 ? 'block' : 'none';
+                    document.querySelector('.d-cpl-4').style.display = val >= 4 ? 'block' : 'none';
+                } else {
+                    dDatasCplsBox.style.display = 'none';
+                }
+            }
         }
 
-        // Attach listeners to all inputs to trigger evaluation
+        // Event listeners para reavaliar as regras quando houver mudanças
         document.addEventListener('change', evaluateLogic);
         document.addEventListener('input', evaluateLogic);
-        evaluateLogic(); // Run once on load
+        evaluateLogic(); // Executa ao carregar a página
 
-        // --- 3. Form Submission ---
+        // --- 4. Form Submission ---
         const form = document.getElementById('onboarding_form');
         const btnSubmit = document.getElementById('btn_submit');
         const successMsg = document.getElementById('success_message');
         
-        // COLE SUA URL DE IMPLANTAÇÃO REAL DO APPS SCRIPT AQUI!
+        // MANTENHA A SUA URL REAL DE IMPLEMENTAÇÃO DO GOOGLE APPS SCRIPT AQUI!
         const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
 
         form.addEventListener('submit', async (e) => {
@@ -1310,7 +1374,7 @@
             }
 
             try {
-                // A SOLUÇÃO: mode 'no-cors' força o navegador a ignorar barreiras CORS na resposta.
+                // Utilizando modo 'no-cors' para evitar bloqueios de segurança do navegador na resposta
                 await fetch(webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
