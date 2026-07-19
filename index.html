@@ -4,33 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onboarding Operacional - S.O.L</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght=300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fcf9f5;
-            --text-color: #3e2723;
-            --text-muted: #8d6e63;
-            --card-bg: #ffffff;
-            --border-color: #d7ccc8;
-            --primary-color: #8d6e63;
-            --primary-hover: #6d4c41;
-            --accent-color: #d4af37;
-            --input-bg: #ffffff;
-            --shadow: 0 8px 15px rgba(141, 110, 99, 0.08);
+            /* PADRÃO: Dark Theme - Preto absoluto e Marrom Luxo */
+            --bg-color: #0d0d0d;
+            --text-color: #f5f5f5;
+            --text-muted: #a6a6a6;
+            --card-bg: #171714;
+            --border-color: #2c2c26;
+            --primary-color: #4a2c26; /* Marrom escuro luxo nos botões e títulos */
+            --primary-hover: #331b17;
+            --accent-color: #d4af37; /* Dourado */
+            --input-bg: #22221f;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             --transition: all 0.3s ease;
         }
 
-        [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #ecf0f1;
-            --text-muted: #bdc3c7;
-            --card-bg: #1e1e1e;
-            --border-color: #333333;
-            --primary-color: #d4af37;
-            --primary-hover: #b5952f;
-            --accent-color: #d4af37;
-            --input-bg: #2c2c2c;
-            --shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+        [data-theme="light"] {
+            /* OPCIONAL: Light Theme - Tons creme e marrom */
+            --bg-color: #fcf9f5;
+            --text-color: #2d1d1a;
+            --text-muted: #7a5c55;
+            --card-bg: #ffffff;
+            --border-color: #e8e2de;
+            --primary-color: #4a2c26; /* Mantém o marrom escuro destacado */
+            --primary-hover: #331b17;
+            --accent-color: #b5952f;
+            --input-bg: #ffffff;
+            --shadow: 0 8px 25px rgba(78, 52, 46, 0.06);
         }
 
         * {
@@ -71,17 +73,24 @@
             box-shadow: var(--shadow);
         }
 
-        .logo-upload-container {
-            text-align: center;
-            margin-bottom: 30px;
+        .theme-toggle:hover {
+            border-color: var(--accent-color);
         }
 
+        .logo-upload-container {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        /* LOGO AJUSTADA: Maior, imponente e sem cortes circulares */
         .logo-preview-box {
-            width: 150px;
-            height: 150px;
+            width: 100%;
+            max-width: 260px;
+            min-height: 100px;
             margin: 0 auto;
             border: none;
-            border-radius: 50%;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -91,7 +100,8 @@
 
         .logo-preview-box img {
             width: 100%;
-            height: 100%;
+            height: auto;
+            max-height: 160px;
             object-fit: contain;
             display: none; 
         }
@@ -112,10 +122,11 @@
             margin-bottom: 20px;
         }
 
+        /* Nomes das sessões em marrom escuro com letras brancas */
         legend {
             background: var(--primary-color);
-            color: #fff;
-            padding: 8px 20px;
+            color: #ffffff;
+            padding: 10px 24px;
             border-radius: 20px;
             font-weight: 600;
             font-size: 1.1rem;
@@ -165,28 +176,36 @@
             border-left: 3px solid var(--primary-color);
         }
 
+        /* Botão de envio em marrom escuro com letras brancas */
         button[type="submit"] {
             background-color: var(--primary-color);
-            color: white;
+            color: #ffffff;
             border: none;
-            padding: 15px 30px;
+            padding: 16px 30px;
             border-radius: 8px;
             font-size: 1.1rem;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
             box-shadow: var(--shadow);
+            transition: var(--transition);
+            letter-spacing: 0.5px;
         }
 
+        button[type="submit"]:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Títulos de bifurcação em marrom escuro com letras brancas */
         .bifurcation-title {
             background-color: var(--primary-color);
-            color: #fff;
+            color: #ffffff;
             padding: 15px;
             border-radius: 8px;
             text-align: center;
             margin: 30px 0 20px 0;
-            font-weight: 600;
+            font-weight: 700;
             box-shadow: var(--shadow);
         }
 
@@ -197,12 +216,12 @@
 
 <div class="container">
     <header>
-        <button id="theme_toggle" class="theme-toggle">🌙 Dark Mode</button>
+        <button id="theme_toggle" class="theme-toggle">☀️ Light Mode</button>
     </header>
 
     <div class="logo-upload-container">
         <div class="logo-preview-box" id="logo_preview_box">
-            <div id="logo_loading" style="color: var(--text-muted); font-size: 0.9rem;">⏳ Carregando Logo...</div>
+            <div id="logo_loading" style="color: var(--text-muted); font-size: 0.9rem;">⏳ Carregando Identidade...</div>
             <img id="logo_image" alt="Logo do Projeto">
         </div>
     </div>
@@ -258,7 +277,7 @@
                     <input type="text" id="mes_ano_execucao" name="mes_ano_execucao" required>
                 </div>
                 <div class="form-group">
-                    <label for="data_inicio_producao">Data de Início da Produção:</label>
+                    <label TIME-STAMP for="data_inicio_producao">Data de Início da Produção:</label>
                     <input type="date" id="data_inicio_producao" name="data_inicio_producao" required>
                 </div>
             </div>
@@ -430,7 +449,6 @@
                 <div class="grid-2">
                     <div class="form-group"><label>Início Captação:</label><input type="datetime-local" name="a_data_captacao"></div>
                     <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="a_data_abertura_carrinho"></div>
-                    <!-- CORRIGIDO: Data Direta do Calendário -->
                     <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="a_data_debriefing"></div>
                 </div>
                 <div class="form-group">
@@ -460,7 +478,6 @@
                 <div class="grid-2">
                     <div class="form-group"><label>Início Captação:</label><input type="datetime-local" name="b_data_captacao"></div>
                     <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="b_data_carrinho"></div>
-                    <!-- CORRIGIDO: Data Direta do Calendário -->
                     <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="b_data_debriefing"></div>
                 </div>
             </fieldset>
@@ -473,7 +490,6 @@
                 <legend>🗓️ Cronograma Perpétuo</legend>
                 <div class="grid-2">
                     <div class="form-group"><label>Abertura Carrinho:</label><input type="datetime-local" name="c_data_abertura"></div>
-                    <!-- CORRIGIDO: Data Direta do Calendário -->
                     <div class="form-group"><label>Data de Debriefing:</label><input type="date" name="c_data_debriefing"></div>
                 </div>
             </fieldset>
@@ -501,7 +517,6 @@
                         <option value="4">4 Aulas/CPLs ou mais</option>
                     </select>
                 </div>
-                <!-- CORRIGIDO: Datas dinâmicas abrindo perfeitamente no Pago -->
                 <div id="d_datas_cpls" class="grid-2 sub-group" style="display:none;">
                     <div class="form-group d-cpl-1"><label>Data Aula/CPL 1:</label><input type="datetime-local" name="d_data_cpl_1"></div>
                     <div class="form-group d-cpl-2"><label>Data Aula/CPL 2:</label><input type="datetime-local" name="d_data_cpl_2"></div>
@@ -522,28 +537,36 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         // !!! COLOQUE A SUA URL DO APPS SCRIPT AQUI !!!
-        const webhookUrl = 'https://script.google.com/macros/s/AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ/exec'; 
+        const webhookUrl = 'AKfycbxx_nenW5eDyYotv8osLcwQ66CVpQaAaEnawRZqvMDEWo3vLLlcJbQcv4YLo0sFEqQ'; 
 
-        // --- 1. PUXA A LOGO AUTOMATICAMENTE DA PLANILHA ANTES DE TUDO ---
+        // --- 1. PUXA A LOGO AUTOMATICAMENTE DA PLANILHA ---
         const logoImage = document.getElementById('logo_image');
         const logoLoading = document.getElementById('logo_loading');
         
         fetch(webhookUrl)
             .then(res => res.json())
             .then(data => {
-                if (data && data.logoUrl) {
+                if (data && data.logoUrl && data.logoUrl !== "") {
                     logoImage.src = data.logoUrl;
                     logoImage.style.display = 'block';
                     if(logoLoading) logoLoading.style.display = 'none';
+                } else {
+                    if(logoLoading) logoLoading.innerText = 'Defina a logo na aba CONFIG_LOGO da planilha';
                 }
             })
             .catch(() => { if(logoLoading) logoLoading.innerText = 'Logo indisponível'; });
 
-        // --- 2. Theme Toggle ---
+        // --- 2. Theme Toggle (Invertido: Dark é padrão, troca para Light) ---
         const themeToggle = document.getElementById('theme_toggle');
         themeToggle.addEventListener('click', () => {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+            if (isLight) {
+                document.documentElement.removeAttribute('data-theme');
+                themeToggle.innerText = '☀️ Light Mode';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                themeToggle.innerText = '🌙 Dark Mode';
+            }
         });
 
         // --- 3. Motor de Lógica Condicional ---
@@ -604,6 +627,7 @@
             try {
                 await fetch(webhookUrl, { method: 'POST', mode: 'no-cors', body: urlSearchParams });
                 form.style.display = 'none';
+                document.querySelector('.logo-upload-container').style.display = 'none';
                 document.getElementById('success_message').classList.remove('hidden');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } catch (error) {
